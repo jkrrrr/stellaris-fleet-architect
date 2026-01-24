@@ -33,12 +33,28 @@ class ResourceConvertor:
         "zro" : 20, "dark_matter" : 20, "living_metal" : 20, "nanites" : 20,
     }
 
-    def calculate_total_cost(self):
+    def _calculate_total_cost(self, resources, debug_msg = False):
         total=0.0
+
+        for key in resources.keys():
+
+            if debug_msg == True:
+                print(f"Resource = {key}, Amount of resource = {resources[key]}, Value of resource = {self.cost_values[key]}")
+
+            total += self.cost_values[key] * resources[key]
+
+        return total
         #Method to convert costs of all types of resources into one centralized cost
-        pass
 
-    def get_total_cost(self):
-        return self.calculate_total_cost()
+    def get_total_cost(self, resources, debug_msg = False):
+        return self._calculate_total_cost(resources, debug_msg)
 
+a = {
+    "energy" : 10,
+    "alloys" : 100,
+    "living_metal" : 10
+}
+
+b = ResourceConvertor()
+print(b.get_total_cost(a))
 
